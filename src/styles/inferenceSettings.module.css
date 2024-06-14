@@ -1,0 +1,149 @@
+/*
+ * Copyright 2022 Sony Semiconductor Solutions Corp. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+.inferenceSettingDiv {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pollingDiv {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.imageSizeDiv {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.imageResolutionDiv {
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.decimalPointDiv {
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.inferenceRangeDiv {
+    display: flex;
+}
+
+.occupancyRateDiv {
+    margin-left: auto;
+    margin-right: 50px;
+}
+
+.occupancyColorDiv {
+    margin-right: auto;
+}
+
+.buttonDiv {
+    margin-top: 20px;
+    display: flex;
+}
+
+.subTitle {
+    width: 200px;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.subValue {
+    width: 100px;
+    margin-right: 20px;
+    text-align: right;
+}
+
+.subTitleUnit {
+    width: 200px;
+    margin-right: auto;
+}
+
+.subTitleShortLeft {
+    text-align: center;
+    width: 100px;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.subTitleShort {
+    text-align: center;
+    width: 100px;
+    margin-right: 20px;
+}
+
+.subValueShort {
+    width: 50px;
+    margin-right: 20px;
+    text-align: right;
+}
+
+.subValueShortRight {
+    width: 50px;
+    margin-right: auto;
+    text-align: right;
+}
+
+.saveButton {
+    margin-left: auto;
+    margin-right: 20;
+}
+
+.backButton {
+    margin-left: 20px;
+    margin-right: auto;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+  
+  .toggle_buttons {
+    display: flex;
+  }
+  
+  .toggle_button {
+    flex: 1;
+    height: 40px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+  }
+  
+  .toggle_button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .toggle_button.active {
+    background-color: #06741a;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .toggle_button span {
+    pointer-events: none;
+  }
+  
