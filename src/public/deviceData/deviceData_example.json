@@ -1,0 +1,252 @@
+{
+	"devices": [
+	  {
+	    "device_id": "sid-device1",
+	    "place": "",
+	    "comment": "",
+	    "property": {
+	      "device_name": "CAMERA_1_00757",
+	      "internal_device_id": "e91b1ec0-a906-11ed-8d1e-59215eeb8237"
+	    },
+	    "ins_id": "00u3ip8kccVwkoc2x697",
+	    "ins_date": "2023-02-10T05:51:06.817550+00:00",
+	    "upd_id": "00u3ip8kccVwkoc2x697",
+	    "upd_date": "2023-02-10T05:51:06.817550+00:00",
+	    "connectionState": "Connected",
+	    "lastActivityTime": "2023-02-15T02:29:20",
+	    "models": [
+	      {
+	        "model_version_id": "Cardboard_Box_Detection_v0.0.1:v1.00"
+	      }
+	    ],
+	    "device_groups": [
+	      {
+	        "device_group_id": "Default",
+	        "device_type": "01",
+	        "comment": "Default group",
+	        "ins_id": "System",
+	        "ins_date": "2023-02-06T00:42:31.963333+00:00",
+	        "upd_id": "System",
+	        "upd_date": "2023-02-06T00:42:31.963333+00:00"
+	      }
+	    ]
+	  },
+	  {
+	    "device_id": "sid-device2",
+	    "place": "",
+	    "comment": "",
+	    "property": {
+	      "device_name": "CAMERA_2_00715",
+	      "internal_device_id": "ff7e0420-a906-11ed-8d1e-59215eeb8237"
+	    },
+	    "ins_id": "00u3ip8kccVwkoc2x697",
+	    "ins_date": "2023-02-10T05:51:44.458879+00:00",
+	    "upd_id": "00u3ip8kccVwkoc2x697",
+	    "upd_date": "2023-02-10T05:51:44.458879+00:00",
+	    "connectionState": "Connected",
+	    "lastActivityTime": "2023-02-15T02:29:19",
+	    "models": [
+	      {
+	        "model_version_id": "Cardboard_Box_Detection_v0.0.1:v1.00"
+	      }
+	    ],
+	    "device_groups": [
+	      {
+	        "device_group_id": "Default",
+	        "device_type": "01",
+	        "comment": "Default group",
+	        "ins_id": "System",
+	        "ins_date": "2023-02-06T00:42:31.963333+00:00",
+	        "upd_id": "System",
+	        "upd_date": "2023-02-06T00:42:31.963333+00:00"
+	      }
+	    ]
+	  },
+	  {
+	    "device_id": "sid-device3",
+	    "place": "",
+	    "comment": "",
+	    "property": {
+	      "device_name": "CAMERA_3_00707",
+	      "internal_device_id": "2026eac0-a907-11ed-8d1e-59215eeb8237"
+	    },
+	    "ins_id": "00u3ip8kccVwkoc2x697",
+	    "ins_date": "2023-02-10T05:52:39.205630+00:00",
+	    "upd_id": "00u3ip8kccVwkoc2x697",
+	    "upd_date": "2023-02-10T05:52:39.205630+00:00",
+	    "connectionState": "Connected",
+	    "lastActivityTime": "2023-02-15T02:29:22",
+	    "models": [
+	      {
+	        "model_version_id": "Cardboard_Box_Detection_v0.0.1:v1.00"
+	      }
+	    ],
+	    "device_groups": [
+	      {
+	        "device_group_id": "Default",
+	        "device_type": "01",
+	        "comment": "Default group",
+	        "ins_id": "System",
+	        "ins_date": "2023-02-06T00:42:31.963333+00:00",
+	        "upd_id": "System",
+	        "upd_date": "2023-02-06T00:42:31.963333+00:00"
+	      }
+	    ]
+	  },
+	  {
+	    "device_id": "sid-device4",
+	    "place": "",
+	    "comment": "",
+	    "property": {
+	      "device_name": "CAMERA_4_00756",
+	      "internal_device_id": "39ca5520-a907-11ed-8d1e-59215eeb8237"
+	    },
+	    "ins_id": "00u3ip8kccVwkoc2x697",
+	    "ins_date": "2023-02-10T05:53:22.217221+00:00",
+	    "upd_id": "00u3ip8kccVwkoc2x697",
+	    "upd_date": "2023-02-10T05:53:22.217221+00:00",
+	    "connectionState": "Connected",
+	    "lastActivityTime": "2023-02-15T02:29:22",
+	    "models": [
+	      {
+	        "model_version_id": "Cardboard_Box_Detection_v0.0.1:v1.00"
+	      }
+	    ],
+	    "device_groups": [
+	      {
+	        "device_group_id": "Default",
+	        "device_type": "01",
+	        "comment": "Default group",
+	        "ins_id": "System",
+	        "ins_date": "2023-02-06T00:42:31.963333+00:00",
+	        "upd_id": "System",
+	        "upd_date": "2023-02-06T00:42:31.963333+00:00"
+	      }
+	    ]
+	  },
+	  {
+	    "device_id": "sid-device5",
+	    "place": "",
+	    "comment": "",
+	    "property": {
+	      "device_name": "CAMERA_5_00727",
+	      "internal_device_id": "503d1900-a907-11ed-8d1e-59215eeb8237"
+	    },
+	    "ins_id": "00u3ip8kccVwkoc2x697",
+	    "ins_date": "2023-02-10T05:54:00.014746+00:00",
+	    "upd_id": "00u3ip8kccVwkoc2x697",
+	    "upd_date": "2023-02-10T05:54:00.014746+00:00",
+	    "connectionState": "Connected",
+	    "lastActivityTime": "2023-02-15T02:29:21",
+	    "models": [
+	      {
+	        "model_version_id": "Cardboard_Box_Detection_v0.0.1:v1.00"
+	      }
+	    ],
+	    "device_groups": [
+	      {
+	        "device_group_id": "Default",
+	        "device_type": "01",
+	        "comment": "Default group",
+	        "ins_id": "System",
+	        "ins_date": "2023-02-06T00:42:31.963333+00:00",
+	        "upd_id": "System",
+	        "upd_date": "2023-02-06T00:42:31.963333+00:00"
+	      }
+	    ]
+	  },
+	  {
+	    "device_id": "sid-device6",
+	    "place": "",
+	    "comment": "",
+	    "property": {
+	      "device_name": "CAMERA_6_00714",
+	      "internal_device_id": "6b2e8730-a907-11ed-8d1e-59215eeb8237"
+	    },
+	    "ins_id": "00u3ip8kccVwkoc2x697",
+	    "ins_date": "2023-02-10T05:54:45.148593+00:00",
+	    "upd_id": "00u3ip8kccVwkoc2x697",
+	    "upd_date": "2023-02-10T05:54:45.148593+00:00",
+	    "connectionState": "Connected",
+	    "lastActivityTime": "2023-02-15T02:29:21",
+	    "models": [
+	      {
+	        "model_version_id": "Cardboard_Box_Detection_v0.0.1:v1.00"
+	      }
+	    ],
+	    "device_groups": [
+	      {
+	        "device_group_id": "Default",
+	        "device_type": "01",
+	        "comment": "Default group",
+	        "ins_id": "System",
+	        "ins_date": "2023-02-06T00:42:31.963333+00:00",
+	        "upd_id": "System",
+	        "upd_date": "2023-02-06T00:42:31.963333+00:00"
+	      }
+	    ]
+	  },
+	  {
+	    "device_id": "sid-device7",
+	    "place": "",
+	    "comment": "",
+	    "property": {
+	      "device_name": "CAMERA_7_00728",
+	      "internal_device_id": "813569e0-a907-11ed-8d1e-59215eeb8237"
+	    },
+	    "ins_id": "00u3ip8kccVwkoc2x697",
+	    "ins_date": "2023-02-10T05:55:22.102110+00:00",
+	    "upd_id": "00u3ip8kccVwkoc2x697",
+	    "upd_date": "2023-02-10T05:55:22.102110+00:00",
+	    "connectionState": "Connected",
+	    "lastActivityTime": "2023-02-15T02:29:20",
+	    "models": [
+	      {
+	        "model_version_id": "Cardboard_Box_Detection_v0.0.1:v1.00"
+	      }
+	    ],
+	    "device_groups": [
+	      {
+	        "device_group_id": "Default",
+	        "device_type": "01",
+	        "comment": "Default group",
+	        "ins_id": "System",
+	        "ins_date": "2023-02-06T00:42:31.963333+00:00",
+	        "upd_id": "System",
+	        "upd_date": "2023-02-06T00:42:31.963333+00:00"
+	      }
+	    ]
+	  },
+	  {
+	    "device_id": "sid-device8",
+	    "place": "",
+	    "comment": "",
+	    "property": {
+	      "device_name": "CAMERA_8_00716",
+	      "internal_device_id": "92129530-a907-11ed-8d1e-59215eeb8237"
+	    },
+	    "ins_id": "00u3ip8kccVwkoc2x697",
+	    "ins_date": "2023-02-10T05:55:50.630716+00:00",
+	    "upd_id": "00u3ip8kccVwkoc2x697",
+	    "upd_date": "2023-02-10T05:55:50.630716+00:00",
+	    "connectionState": "Connected",
+	    "lastActivityTime": "2023-02-15T02:29:22",
+	    "models": [
+	      {
+	        "model_version_id": "Cardboard_Box_Detection_v0.0.1:v1.00"
+	      }
+	    ],
+	    "device_groups": [
+	      {
+	        "device_group_id": "Default",
+	        "device_type": "01",
+	        "comment": "Default group",
+	        "ins_id": "System",
+	        "ins_date": "2023-02-06T00:42:31.963333+00:00",
+	        "upd_id": "System",
+	        "upd_date": "2023-02-06T00:42:31.963333+00:00"
+	      }
+	    ]
+	  }
+	]
+}

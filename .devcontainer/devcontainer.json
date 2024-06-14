@@ -1,0 +1,45 @@
+{
+	"name": "Node.js & TypeScript",
+	"workspaceFolder": "/workspace",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+	"build": {
+	  "dockerfile": "Dockerfile",
+	  "context": "..",
+	  "args": {
+		// Update 'VARIANT' to pick a Node version: 16, 14, 12.
+		// Append -bullseye or -buster to pin to an OS version.
+		// Use -bullseye variants on local on arm64/Apple Silicon.
+		"VARIANT": "16-bullseye"
+	  }
+	},
+	
+	"runArgs": ["--init"],
+  
+	// Set *default* container specific settings.json values on container create.
+	"settings": {},
+  
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": ["dbaeumer.vscode-eslint"],
+  
+	// Use 'initializeCommand' to run commands before the container is created.
+	"initializeCommand": [".devcontainer/initializedCommand"],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "npm install",
+  
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "node",
+  
+	// for git submodules: https://docs.github.com/ja/codespaces/managing-your-codespaces/managing-repository-access-for-your-codespaces
+	"customizations": {
+	  "codespaces": {
+		"repositories": {
+		  "SonySemiconductorSolutions/aitrios-sdk-console-access-lib-ts": {
+			"permissions": {
+			  "contents": "read"
+			}
+		  }
+		}
+	  }
+	}
+  }
