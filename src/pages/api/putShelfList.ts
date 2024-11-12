@@ -15,20 +15,20 @@
  */
 import type { NextApiRequest, NextApiResponse } from 'next'
 import * as fs from 'fs'
-import getIsLocalMode from "./readModeSettings"
+import getIsLocalMode from './readModeSettings'
 
 const PUBLIC_DIRECTORY = './public'
 const SHELF_DIRECTORY = PUBLIC_DIRECTORY + '/shelfList'
 let SHELF_FILENAME
 
 const saveShelf = async (saveData: string) => {
-  let isLocalMode=getIsLocalMode()
-  if(isLocalMode){
-    //console.log("Local Simulate Mode")
+  const isLocalMode = getIsLocalMode()
+  if (isLocalMode) {
+    // console.log("Local Simulate Mode")
     SHELF_FILENAME = SHELF_DIRECTORY + '/shelfList_example.json'
   }
-  if(!isLocalMode){
-    //console.log("Aitorios Connect Mode")
+  if (!isLocalMode) {
+    // console.log("Aitorios Connect Mode")
     SHELF_FILENAME = SHELF_DIRECTORY + '/shelfList.json'
   }
 

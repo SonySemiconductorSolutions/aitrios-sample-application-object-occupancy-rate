@@ -23,9 +23,9 @@ import { API_TIME_OUT } from '../common/config'
 
 export default function InferenceSettings () {
   // true:local mode  false: aitrios mode
-  const [isLocalMode, setisLocalMode] = useState(true);
+  const [isLocalMode, setisLocalMode] = useState(true)
   const [occupancySettings, setOccupancySettings] = useState<OccupancySettings>({
-    isLocalMode:true,
+    isLocalMode: true,
     pollingInterval: 60000,
     imageHeight: 300,
     imageWidth: 300,
@@ -40,8 +40,8 @@ export default function InferenceSettings () {
   }
   )
   const ChangeToggleButton = () => {
-    setisLocalMode(!isLocalMode);
-  };
+    setisLocalMode(!isLocalMode)
+  }
 
   useEffect(() => {
     const get = async () => {
@@ -49,7 +49,7 @@ export default function InferenceSettings () {
         const response = await axios.get('/api/getInferenceSettings', { timeout: API_TIME_OUT })
         if (response.data) {
           setOccupancySettings(response.data)
-          if (!response.data.isLocalMode){
+          if (!response.data.isLocalMode) {
             ChangeToggleButton()
           }
         }
@@ -62,9 +62,9 @@ export default function InferenceSettings () {
 
   useEffect(() => {
     const tmpSettings = { ...occupancySettings }
-    tmpSettings.isLocalMode=isLocalMode
+    tmpSettings.isLocalMode = isLocalMode
     setOccupancySettings(tmpSettings)
-  },[isLocalMode])
+  }, [isLocalMode])
 
   const saveSettings = () => {
     const put = async () => {
@@ -184,7 +184,7 @@ export default function InferenceSettings () {
         }
         <br/>
         <div className="toggle">
-          <ToggleSwitchButton 
+          <ToggleSwitchButton
             option1Text="Local Simulate Mode 　"
             option2Text="AITRIOS Connect Mode"
             isLocalMode={isLocalMode}

@@ -41,7 +41,7 @@ export default function DeviceInference () {
   const [oldPath, setOldPath] = useState<paper.Path[]>([])
   const [isPolling, setIsPolling] = useState<boolean>(false)
   const [occupancySettings, setOccupancySettings] = useState<OccupancySettings>()
-  const [isloading, setIsLoading] = useState(false);
+  const [isloading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const get = async () => {
@@ -224,7 +224,11 @@ export default function DeviceInference () {
           },
           timeout: API_TIME_OUT
         })
-        setBase64Image(response.data.image)
+        if (!response.data.image) {
+          alert('直近1時間の画像データが存在しません。Console上でGet Inference DataがOnになっているか確認してください。')
+        } else {
+          setBase64Image(response.data.image)
+        }
       } catch (error) {
         console.error(error)
       }

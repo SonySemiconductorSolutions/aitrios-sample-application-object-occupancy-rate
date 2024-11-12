@@ -15,7 +15,7 @@
  */
 import type { NextApiRequest, NextApiResponse } from 'next'
 import * as fs from 'fs'
-import getIsLocalMode from "./readModeSettings"
+import getIsLocalMode from './readModeSettings'
 
 const PUBLIC_DIRECTORY = './public'
 
@@ -23,13 +23,13 @@ const readShelf = async () => {
   let readData: Buffer
   let DEVICERANGE_FILENAME
 
-  let isLocalMode=getIsLocalMode()
-  if(isLocalMode){
-    //console.log("Local Simulate Mode")
+  const isLocalMode = getIsLocalMode()
+  if (isLocalMode) {
+    // console.log("Local Simulate Mode")
     DEVICERANGE_FILENAME = PUBLIC_DIRECTORY + '/deviceRange/deviceRange_example.json'
   }
-  if(!isLocalMode){
-    //console.log("Aitorios Connect Mode")
+  if (!isLocalMode) {
+    // console.log("Aitorios Connect Mode")
     DEVICERANGE_FILENAME = PUBLIC_DIRECTORY + '/deviceRange/deviceRange.json'
   }
 

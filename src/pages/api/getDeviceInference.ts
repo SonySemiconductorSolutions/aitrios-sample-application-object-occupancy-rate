@@ -17,7 +17,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Client, Config } from 'consoleAccessLibrary'
 import { getConsoleAccessLibrarySettings, ConsoleAccessLibrarySettings } from '../../common/config'
 import * as fs from 'fs'
-import getIsLocalMode from "./readModeSettings"
+import getIsLocalMode from './readModeSettings'
 
 const PUBLIC_DIRECTORY = './public'
 const DEVICINFERENCE_DIRECTORY = PUBLIC_DIRECTORY + '/deviceInference'
@@ -78,34 +78,33 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     return
   }
 
-  let isLocalMode=getIsLocalMode()
-  if(isLocalMode){
-    //console.log("Local Simulate Mode")
+  const isLocalMode = getIsLocalMode()
+  if (isLocalMode) {
+    // console.log("Local Simulate Mode")
     await readDeviceInferenceFile(req.query.deviceId.toString())
-    .then(result => {
-      res.status(200).json(result)
-    })
-    .catch(error => {
-      if (error.response) {
-        res.status(500).json({ message: error.response.data.message })
-      } else {
-        res.status(500).json({ message: error.message })
-      }
-    })
-
+      .then(result => {
+        res.status(200).json(result)
+      })
+      .catch(error => {
+        if (error.response) {
+          res.status(500).json({ message: error.response.data.message })
+        } else {
+          res.status(500).json({ message: error.message })
+        }
+      })
   }
-  if(!isLocalMode){
-    //console.log("Aitorios Connect Mode")
+  if (!isLocalMode) {
+    // console.log("Aitorios Connect Mode")
     await readDeviceInference(req.query.deviceId.toString())
-    .then(result => {
-      res.status(200).json(result)
-    })
-    .catch(error => {
-      if (error.response) {
-        res.status(500).json({ message: error.response.data.message })
-      } else {
-        res.status(500).json({ message: error.message })
-      }
-    })
+      .then(result => {
+        res.status(200).json(result)
+      })
+      .catch(error => {
+        if (error.response) {
+          res.status(500).json({ message: error.response.data.message })
+        } else {
+          res.status(500).json({ message: error.message })
+        }
+      })
   }
 }

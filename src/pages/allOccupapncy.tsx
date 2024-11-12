@@ -30,7 +30,7 @@ export default function AllOccupancy () {
   const [drawerOccupancyList, setDrawerOccupancyList] = useState<drawerOccupancy[]>([])
   const [isPolling, setIsPolling] = useState<boolean>(false)
   const [occupancySettings, setOccupancySettings] = useState<OccupancySettings>()
-  const [isloading, setIsLoading] = useState(false);
+  const [isloading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const get = async () => {
@@ -164,12 +164,26 @@ export default function AllOccupancy () {
           if ((joinData.shelfName === item.shelfName) && (joinData.drawerName === item.drawerName)) {
             joinData.occupancyList = joinData.occupancyList.filter((x, i, arr) => arr.findIndex(y => y.deviceName === x.deviceName) === i)
           }
+
+          let invalidOccupancy = false
+
           for (const occupancy of joinData.occupancyList) {
+            if (occupancy.occupancy < 0) {
+              joinData.occupancy = -1
+              joinData.bgcolor = getColor(joinData.occupancy)
+              invalidOccupancy = true
+              break
+            }
             tmpValidArea += occupancy.height * occupancy.width * (occupancy.occupancy / 100)
             tmpAllArea += occupancy.height * occupancy.width
           }
-          joinData.occupancy = Math.floor(tmpValidArea / tmpAllArea * DECIMAL_MAGNIFICATION) / DECIMAL_POINT
-          joinData.bgcolor = getColor(joinData.occupancy)
+
+          if (!invalidOccupancy) {
+            joinData.occupancy = Math.floor(tmpValidArea / tmpAllArea * DECIMAL_MAGNIFICATION) / DECIMAL_POINT
+            joinData.bgcolor = getColor(joinData.occupancy)
+          } else {
+            (joinData as any).occupancy = '-'
+          }
 
           if (item.detectPerson) {
             joinData.detectPerson = true

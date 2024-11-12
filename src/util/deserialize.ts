@@ -17,7 +17,7 @@ export default function deserialize (inferenceData) {
   const pplOut = SmartCamera.ObjectDetectionTop.getRootAsObjectDetectionTop(tmp)
   const readObjData = pplOut.perception()
   const resNum = readObjData.objectDetectionListLength()
-  //console.log('NumOfDetections:' + String(resNum))
+  // console.log('NumOfDetections:' + String(resNum))
 
   // generate JSON
   const deserializedInferenceData: outputResult = { Inferences: [{}] }

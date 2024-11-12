@@ -5,5 +5,5 @@ export const OverlaySpinner = () => {
     <div className={styles.overlay}>
       <div className={styles.spinner}></div>
     </div>
-  );
-};
+  )
+}
