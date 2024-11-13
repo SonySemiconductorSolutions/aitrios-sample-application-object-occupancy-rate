@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import type { NextApiRequest, NextApiResponse } from 'next'
 import * as fs from 'fs'
 
 const PUBLIC_DIRECTORY = './public'
@@ -37,7 +36,7 @@ const readSettings = () => {
   return readData.toString()
 }
 
-export default function getIsLocalMode(){
-  let setting_json=readSettings()
-  return setting_json ? JSON.parse(setting_json)["isLocalMode"] : null;
+export default function getIsLocalMode () {
+  const settingJson = readSettings()
+  return settingJson ? JSON.parse(settingJson).isLocalMode : null
 }

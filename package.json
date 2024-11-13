@@ -8,13 +8,15 @@
     "start": "next start",
     "test": "jest",
     "coverage": "jest --coverage --silent",
-    "lint": "eslint src --ext ts",
-    "fix": "eslint src --ext ts --fix"
+    "lint": "eslint src --ext ts,tsx --ignore-pattern 'ObjectdetectionGenerated.ts'",
+    "fix": "eslint src --ext ts,tsx --ignore-pattern 'ObjectdetectionGenerated.ts' --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
-    "axios": "^0.27.2",
-    "consoleAccessLibrary": "file:.devcontainer/Dependencies/aitrios-sdk-console-access-lib-ts/src/consoleaccesslibrary-1.2.0.tgz",
+    "axios": "^1.7.7",
+    "consoleAccessLibrary": "file:.devcontainer/Dependencies/aitrios-sdk-console-access-lib-ts/src/consoleaccesslibrary-1.3.0.tgz",
+    "date-fns": "^2.30.0",
+    "date-fns-tz": "^2.0.0",
     "flatbuffers": "1.11.0",
     "js-yaml": "^4.1.0",
     "lib": "^4.3.3",

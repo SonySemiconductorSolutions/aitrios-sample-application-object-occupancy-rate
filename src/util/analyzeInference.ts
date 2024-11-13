@@ -26,24 +26,36 @@ export default function analyzeInference (resultList: outputResults[], rangeList
       return
     }
 
+    // 推論結果が無い場合の処理
+    if (!result.result?.Inferences) {
+      for (const elm of range) {
+        const data: oneDeviceOccupancy = { shelfName: elm.drawer.shelfName, drawerName: elm.drawer.drawerName, deviceName: result.deviceName, occupancy: { deviceName: elm.deviceName, occupancy: 0, height: elm.rect.bottom - elm.rect.top, width: elm.rect.right - elm.rect.left }, OccupancyData: [], rectData: [], rangeRect: elm.rect, detectPerson: false }
+        data.occupancy.occupancy = -1
+        occupancyList.push(data)
+      }
+      continue
+    }
+
     for (const elm of range) {
-      //console.log('deviceName: ' + elm.deviceName + ' shelfName: ' + elm.drawer.shelfName + ' drawerName: ' + elm.drawer.drawerName)
+      // console.log('deviceName: ' + elm.deviceName + ' shelfName: ' + elm.drawer.shelfName + ' drawerName: ' + elm.drawer.drawerName)
       // 初期化
       const data: oneDeviceOccupancy = { shelfName: elm.drawer.shelfName, drawerName: elm.drawer.drawerName, deviceName: result.deviceName, occupancy: { deviceName: elm.deviceName, occupancy: 0, height: elm.rect.bottom - elm.rect.top, width: elm.rect.right - elm.rect.left }, OccupancyData: [], rectData: [], rangeRect: elm.rect, detectPerson: false }
       for (let i = 0; i < RESOLUTION_H; i++) {
         data.OccupancyData.push(new Array(RESOLUTION_W).fill(0))
       }
-      //console.log('range: ' + JSON.stringify(elm.rect))
+      // console.log('range: ' + JSON.stringify(elm.rect))
       // 推論結果とデバイスの判定範囲の矩形に該当する領域に「1」を設定する
-      for (const element of Object.entries(result.result.Inferences[0])) {
-        const rect = judgeRange(element[1], elm)
-        if (((rect.bottom - rect.top) > 0) && ((rect.right - rect.left) > 0)) {
-          for (let y = Math.floor(rect.top / OCCUPANCY_RESOLUTION); y <= Math.floor(rect.bottom / OCCUPANCY_RESOLUTION); y++) {
-            data.OccupancyData[y].fill(1, Math.floor(rect.left / OCCUPANCY_RESOLUTION), Math.floor(rect.right / OCCUPANCY_RESOLUTION))
-          }
-          data.rectData.push(rect)
-          if (element[1].C === 0) {
-            data.detectPerson = true
+      if (result.result?.Inferences !== undefined) {
+        for (const element of Object.entries(result.result.Inferences[0])) {
+          const rect = judgeRange(element[1], elm)
+          if (((rect.bottom - rect.top) > 0) && ((rect.right - rect.left) > 0)) {
+            for (let y = Math.floor(rect.top / OCCUPANCY_RESOLUTION); y <= Math.floor(rect.bottom / OCCUPANCY_RESOLUTION); y++) {
+              data.OccupancyData[y].fill(1, Math.floor(rect.left / OCCUPANCY_RESOLUTION), Math.floor(rect.right / OCCUPANCY_RESOLUTION))
+            }
+            data.rectData.push(rect)
+            if (element[1].C === 0) {
+              data.detectPerson = true
+            }
           }
         }
       }

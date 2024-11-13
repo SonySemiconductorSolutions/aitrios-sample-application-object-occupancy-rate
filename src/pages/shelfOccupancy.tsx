@@ -18,7 +18,6 @@ import { useState, useEffect } from 'react'
 import router from 'next/router'
 import axios from 'axios'
 import paper from 'paper'
-import useInterval from '../hooks/useInterval'
 import deserialize from '../util/deserialize'
 import analyzeInference, { calcDecimalPoint } from '../util/analyzeInference'
 import styles from '../styles/shelfOccupancy.module.css'
@@ -30,16 +29,15 @@ const RECT_WIDTH = 400
 const INNER_RECT_CORRECT = 3
 
 export default function ShelfOccupancy () {
-  const [canvasSize, setCanvasSize] = useState({ width: 300, height: 150 });
+  const [canvasSize, setCanvasSize] = useState({ width: 300, height: 150 })
   const [shelfList, setShelfList] = useState<string[]>([''])
   const [deviceList, setDeviceList] = useState<string[]>([])
   const [deviceRangeList, setDeviceRangeList] = useState<deviceRange[]>([])
   const [drawerOccupancyList, setDrawerOccupancyList] = useState<drawerOccupancy[]>([])
   const [canvas, setCanvas] = useState<HTMLCanvasElement>()
   const [oldPath, setOldPath] = useState<paper.Path | null>(null)
-  const [isPolling, setIsPolling] = useState<boolean>(false)
   const [occupancySettings, setOccupancySettings] = useState<OccupancySettings>()
-  const [isloading, setIsLoading] = useState(false);
+  const [isloading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const get = async () => {
@@ -47,7 +45,6 @@ export default function ShelfOccupancy () {
         const response = await axios.get('/api/getInferenceSettings', { timeout: API_TIME_OUT })
         if (response.data) {
           setOccupancySettings(response.data)
-          setIsPolling(true)
         }
       } catch (error) {
         console.error(error)
@@ -61,7 +58,6 @@ export default function ShelfOccupancy () {
     async function get () {
       obj = await getDeviceRange()
       updateDeviceList(obj.shelfName, obj.list)
-
 
       const canvas = document.getElementById('canvas') as HTMLCanvasElement
       const canvasContext = canvas.getContext('2d')
@@ -82,7 +78,7 @@ export default function ShelfOccupancy () {
   useEffect(() => {
     showOccupancyPicture()
   }, [drawerOccupancyList])
-/*
+  /*
   useInterval(() => {
     getDevice()
   }, isPolling ? occupancySettings.pollingInterval : null)
@@ -128,7 +124,7 @@ export default function ShelfOccupancy () {
           console.error(error)
         }
       )
-      setIsLoading(false)
+    setIsLoading(false)
     return { deviceName: deviceId, result: deserializedInferenceData }
   }
 
@@ -282,7 +278,11 @@ export default function ShelfOccupancy () {
       const text = new paper.PointText(startTextPos)
       text.justification = 'left'
       text.fillColor = new paper.Color(0, 0, 0)
-      text.content = '棚段名: ' + drawerOccupancyList[i].drawerName + ' 占有率: ' + drawerOccupancyList[i].occupancy + ' %'
+      if (drawerOccupancyList[i].occupancy < 0) {
+        text.content = '棚段名: ' + drawerOccupancyList[i].drawerName + ' 占有率: ' + '-' + ' %'
+      } else {
+        text.content = '棚段名: ' + drawerOccupancyList[i].drawerName + ' 占有率: ' + drawerOccupancyList[i].occupancy + ' %'
+      }
       if (drawerOccupancyList[i].detectPerson) {
         text.content += ' 人を検知しています'
       }

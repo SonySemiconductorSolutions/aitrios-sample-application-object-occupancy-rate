@@ -15,24 +15,23 @@
  */
 import type { NextApiRequest, NextApiResponse } from 'next'
 import * as fs from 'fs'
-import getIsLocalMode from "./readModeSettings"
+import getIsLocalMode from './readModeSettings'
 
 const PUBLIC_DIRECTORY = './public'
 const DEVICERANGE_DIRECTORY = PUBLIC_DIRECTORY + '/deviceRange'
-let DEVICERANGE_FILENAME;
+let DEVICERANGE_FILENAME
 
 const saveDeviceRange = async (saveData: string) => {
-
-  let isLocalMode=getIsLocalMode()
-  if(isLocalMode){
-    //console.log("Local Simulate Mode")
+  const isLocalMode = getIsLocalMode()
+  if (isLocalMode) {
+    // console.log("Local Simulate Mode")
     DEVICERANGE_FILENAME = DEVICERANGE_DIRECTORY + '/deviceRange_example.json'
   }
-  if(!isLocalMode){
-    //console.log("Aitorios Connect Mode")
+  if (!isLocalMode) {
+    // console.log("Aitorios Connect Mode")
     DEVICERANGE_FILENAME = DEVICERANGE_DIRECTORY + '/deviceRange.json'
   }
-  
+
   if (!fs.existsSync(DEVICERANGE_DIRECTORY)) {
     fs.mkdirSync(DEVICERANGE_DIRECTORY)
   }
