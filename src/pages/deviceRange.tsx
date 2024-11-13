@@ -34,7 +34,7 @@ export default function DeviceRange () {
   const [deviceRangeList, setDeviceRangeList] = useState<deviceRange[]>([])
   const [nowDrawer, setNowDrawer] = useState<oneDrawer>({ shelfName: '', drawerName: '' })
   const [tmpDeviceRange, setTmpDeviceRange] = useState<rectDeviceRange>(INITIAL_DEVICE_RANGE)
-  const [isloading, setIsLoading] = useState(false);
+  const [isloading, setIsLoading] = useState(false)
   //    const [startRect, setStartRect] = useState<boolean>(false)  // onMouseUpでtrueの判断がされないため一時的に変更
   let startRect: boolean = false
 
@@ -46,7 +46,7 @@ export default function DeviceRange () {
         text.value = JSON.stringify(tmpDeviceRange)
 
         const response = await axios.get('/api/getInferenceSettings', { timeout: API_TIME_OUT })
-        if (response.data) {  
+        if (response.data) {
           // paperのセットアップ前にcanvasのサイズを指定しておく
           // これがないと、paperで表示している範囲指定が上手く表示されない
           const canvas = document.getElementById('canvas') as HTMLCanvasElement
@@ -60,16 +60,16 @@ export default function DeviceRange () {
           paper.view.onMouseDown = (ev: any) => {
             setEndPoint(null)
             setStartPoint(ev.point)
-            //setStartRect(true)
+            // setStartRect(true)
             startRect = true
           }
 
           paper.view.onMouseMove = (ev: any) => {
             if (startRect) {
-              setEndPoint(ev.point);
-              //drawRect();
+              setEndPoint(ev.point)
+              // drawRect();
             }
-          };
+          }
 
           paper.view.onMouseUp = (ev: any) => {
             if (startRect) {
@@ -91,7 +91,7 @@ export default function DeviceRange () {
         const response = await axios.get('/api/getDeviceRelationList', { timeout: API_TIME_OUT })
         if (response.data) {
           const obj: deviceRelation[] = response.data
-          //初期状態ではリスト一番上のデバイスを表示
+          // 初期状態ではリスト一番上のデバイスを表示
           const deviceName = obj[0].deviceName
           const tmpDrawer = obj[0].drawer[0]
           getLatestImage(deviceName)
@@ -107,7 +107,6 @@ export default function DeviceRange () {
     get()
   }, [])
 
-
   useEffect(() => {
     drawImage(base64Image)
   }, [base64Image])
@@ -116,9 +115,9 @@ export default function DeviceRange () {
     drawRect()
   }, [startPoint, endPoint])
 
-  useEffect(()=>{
+  useEffect(() => {
     updateSelectArea()
-  },[tmpDeviceRange])
+  }, [tmpDeviceRange])
 
   const getLatestImage = (deviceId: string) => {
     const get = async () => {
@@ -130,7 +129,11 @@ export default function DeviceRange () {
           },
           timeout: API_TIME_OUT
         })
-        setBase64Image(response.data.image)
+        if (!response.data.image) {
+          alert('直近1時間の画像データが存在しません。Console上でGet Inference DataがOnになっているか確認してください。')
+        } else {
+          setBase64Image(response.data.image)
+        }
       } catch (error) {
         console.error(error)
       }
@@ -165,14 +168,14 @@ export default function DeviceRange () {
         const tmpcanvas = document.getElementById('canvas') as HTMLCanvasElement
         tmpcanvas.width = img.width
         tmpcanvas.height = img.height
-        
+
         // 背景画像を再設定
         const raster = new paper.Raster('image')
         raster.size = new paper.Size(img.width, img.height)
         raster.position = paper.view.center
-        
+
         // 背景画像を再設定すると四角形が削除されるため、背景画像設定後四角形を再描画する
-          drawRect();
+        drawRect()
       }
     }
     if (image.length === 0) {
@@ -193,7 +196,7 @@ export default function DeviceRange () {
       tmpPath.fillColor = new paper.Color(1, 0, 0, 0.5)
       tmpPath.strokeWidth = 2
 
-      //const text = document.getElementById('DeviceRangeText') as HTMLTextAreaElement
+      // const text = document.getElementById('DeviceRangeText') as HTMLTextAreaElement
 
       let top: number, left: number, bottom: number, right: number
 
@@ -212,39 +215,37 @@ export default function DeviceRange () {
         right = startPoint.x
       }
 
-      //text.value = JSON.stringify({ top, left, bottom, right })
+      // text.value = JSON.stringify({ top, left, bottom, right })
       setTmpDeviceRange({ top, left, bottom, right })
       setOldPath(tmpPath)
     }
   }
 
-  const updateSelectArea =() =>{
-    let updateAreaText=tmpDeviceRange
+  const updateSelectArea = () => {
+    const updateAreaText = tmpDeviceRange
     const text = document.getElementById('DeviceRangeText') as HTMLTextAreaElement
     text.value = JSON.stringify(updateAreaText)
-
   }
 
-  const initializeSelectArea =(device_id) =>{
+  const initializeSelectArea = (deviceId) => {
     let updateAreaText
-    const selectArea=deviceRangeList.find((elm) => elm.deviceName === device_id)
-    if(selectArea){
-      updateAreaText=selectArea.rect
-    }else{
-      updateAreaText=INITIAL_DEVICE_RANGE
+    const selectArea = deviceRangeList.find((elm) => elm.deviceName === deviceId)
+    if (selectArea) {
+      updateAreaText = selectArea.rect
+    } else {
+      updateAreaText = INITIAL_DEVICE_RANGE
     }
     const text = document.getElementById('DeviceRangeText') as HTMLTextAreaElement
     text.value = JSON.stringify(updateAreaText)
-
   }
 
-  const changeDeviceList = (device_id) => {
-    const selectRelation = deviceRelationList.find((elm) => elm.deviceName === device_id)
+  const changeDeviceList = (deviceId) => {
+    const selectRelation = deviceRelationList.find((elm) => elm.deviceName === deviceId)
     setNowRelation(selectRelation)
     setNowDrawer(selectRelation.drawer[0])
-    reloadDeviceRange(deviceRangeList, selectRelation.drawer[0], device_id)
-    getLatestImage(device_id)
-    initializeSelectArea(device_id)
+    reloadDeviceRange(deviceRangeList, selectRelation.drawer[0], deviceId)
+    getLatestImage(deviceId)
+    initializeSelectArea(deviceId)
   }
 
   const changeDrawerList = () => {
@@ -345,7 +346,7 @@ export default function DeviceRange () {
                 <div className={styles.deviceDiv}>
                     <div><a>デバイス</a></div>
                     <div>
-                    <select id='deviceList' className={styles.deviceList} onChange={(event) => {changeDeviceList(event.target.value);}}>
+                    <select id='deviceList' className={styles.deviceList} onChange={(event) => { changeDeviceList(event.target.value) }}>
                         {
                         deviceRelationList.map((item) => {
                           return (

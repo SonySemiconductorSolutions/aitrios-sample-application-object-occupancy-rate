@@ -17,10 +17,9 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Client, Config } from 'consoleAccessLibrary'
 import { getConsoleAccessLibrarySettings, ConsoleAccessLibrarySettings } from '../../common/config'
 import * as fs from 'fs'
-import getIsLocalMode from "./readModeSettings"
+import getIsLocalMode from './readModeSettings'
 
 const PUBLIC_DIRECTORY = './public'
-
 
 // Local Simulate Mode
 const getDevicesFile = async () => {
@@ -45,7 +44,7 @@ const getDevicesFile = async () => {
 // Aitorios Connect Mode
 // eslint-disable-next-line no-unused-vars
 const getDevices = async () => {
-  const DEVICE_FILENAME = PUBLIC_DIRECTORY + '/deviceData/deviceData.json'
+  // const DEVICE_FILENAME = PUBLIC_DIRECTORY + '/deviceData/deviceData.json'
   const connectionInfo: ConsoleAccessLibrarySettings = getConsoleAccessLibrarySettings()
   let config:Config
   try {
@@ -68,41 +67,41 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     return
   }
 
-  let isLocalMode=getIsLocalMode()
-  if(isLocalMode){
+  const isLocalMode = getIsLocalMode()
+  if (isLocalMode) {
     await getDevicesFile()
-    .then(result => {
-      const deviceData: string[] = []
-      result.devices.forEach((elm: any) => {
-        const modelIds = elm.models.map((model: any) => model.model_version_id.split(':')[0]).filter((modelName: any) => modelName !== '')
-        if (modelIds.length === 0) return
-        deviceData.push(elm.device_id)
+      .then(result => {
+        const deviceData: string[] = []
+        result.devices.forEach((elm: any) => {
+          const modelIds = elm.models.map((model: any) => model.model_version_id.split(':')[0]).filter((modelName: any) => modelName !== '')
+          if (modelIds.length === 0) return
+          deviceData.push(elm.device_id)
+        })
+        res.status(200).json(deviceData)
+      }).catch(err => {
+        if (err.response) {
+          res.status(500).json({ message: err.response.data.message })
+        } else {
+          res.status(500).json({ message: err.message })
+        }
       })
-      res.status(200).json(deviceData)
-    }).catch(err => {
-      if (err.response) {
-        res.status(500).json({ message: err.response.data.message })
-      } else {
-        res.status(500).json({ message: err.message })
-      }
-    })
   }
-  if (!isLocalMode){
+  if (!isLocalMode) {
     await getDevices()
-    .then(result => {
-      const deviceData: string[] = []
-      result.devices.forEach((elm: any) => {
-        const modelIds = elm.models.map((model: any) => model.model_version_id.split(':')[0]).filter((modelName: any) => modelName !== '')
-        if (modelIds.length === 0) return
-        deviceData.push(elm.device_id)
+      .then(result => {
+        const deviceData: string[] = []
+        result.devices.forEach((elm: any) => {
+          const modelIds = elm.models.map((model: any) => model.model_version_id.split(':')[0]).filter((modelName: any) => modelName !== '')
+          if (modelIds.length === 0) return
+          deviceData.push(elm.device_id)
+        })
+        res.status(200).json(deviceData)
+      }).catch(err => {
+        if (err.response) {
+          res.status(500).json({ message: err.response.data.message })
+        } else {
+          res.status(500).json({ message: err.message })
+        }
       })
-      res.status(200).json(deviceData)
-    }).catch(err => {
-      if (err.response) {
-        res.status(500).json({ message: err.response.data.message })
-      } else {
-        res.status(500).json({ message: err.message })
-      }
-    })
   }
 }

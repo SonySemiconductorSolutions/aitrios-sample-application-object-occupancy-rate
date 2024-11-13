@@ -20,16 +20,16 @@ import axios from 'axios'
 import styles from '../styles/deviceRelation.module.css'
 import { API_TIME_OUT } from '../common/config'
 import { OverlaySpinner } from '../hooks/OverlaySpinner'
-//import { useSpinner } from '../hooks/useSpinner'
+// import { useSpinner } from '../hooks/useSpinner'
 
 export default function DeviceRelation () {
-  //const { openSpinner, closeSpinner } = useSpinner()
+  // const { openSpinner, closeSpinner } = useSpinner()
   const [deviceList, setDeviceList] = useState<string[]>([])
   const [drawerList, setDrawerList] = useState<drawers[]>([])
   const [deviceRelationList, setDeviceRelationList] = useState<deviceRelation[]>([])
   const [nowDrawer, setNowDrawer] = useState<drawers>({ shelfName: '', drawerList: [] })
   const [nowRelation, setNowRelation] = useState<deviceRelation>({ deviceName: '', drawer: [] })
-  const [isloading, setIsLoading] = useState(false);
+  const [isloading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const get = async () => {
@@ -46,7 +46,7 @@ export default function DeviceRelation () {
     }
     get()
   }, [])
-  
+
   useEffect(() => {
     const get = async () => {
       try {

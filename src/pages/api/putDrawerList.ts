@@ -15,20 +15,20 @@
  */
 import type { NextApiRequest, NextApiResponse } from 'next'
 import * as fs from 'fs'
-import getIsLocalMode from "./readModeSettings"
+import getIsLocalMode from './readModeSettings'
 
 const PUBLIC_DIRECTORY = './public'
 const DRAWER_DIRECTORY = PUBLIC_DIRECTORY + '/drawerList'
 let DRAWER_FILENAME
 
 const saveDrawer = async (saveData: string) => {
-  let isLocalMode=getIsLocalMode()
-  if(isLocalMode){
-    //console.log("Local Simulate Mode")
+  const isLocalMode = getIsLocalMode()
+  if (isLocalMode) {
+    // console.log("Local Simulate Mode")
     DRAWER_FILENAME = DRAWER_DIRECTORY + '/drawerList_example.json'
   }
-  if(!isLocalMode){
-    //console.log("Aitorios Connect Mode")
+  if (!isLocalMode) {
+    // console.log("Aitorios Connect Mode")
     DRAWER_FILENAME = DRAWER_DIRECTORY + '/drawerList.json'
   }
 

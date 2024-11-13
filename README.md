@@ -23,13 +23,15 @@ This repository provides sample code for application that calculates the occupan
 ![object-occupancy-rate-sample-image](./docs/img/image7.png)
 
 ## Restrictions
-Following required software you need to install in your system
+- Following required software you need to install in your system
 
-- Node.js version 16.x.x (Confirmed it functions with version 16.20.2)
+  - Node.js version 16.x.x (Confirmed it functions with version 16.20.2)
 
-For installation please refer the following link:
+  For installation please refer the following link:
 
-https://nodejs.org/en/download/
+  https://nodejs.org/en/download/
+
+- In the `AITRIOS connect mode` of this application, only the image data of the last 1 hour is acquired. Therefore, when using this mode, **please make sure that the device is either in the process of uploading image and inference result or has the data has been uploaded in the past 1 hour**.
 
 ## Getting Started
 For basic Edge Device and Console operation, please refer to the [**Device Setup Guide**](https://developer.aitrios.sony-semicon.com/en/edge-ai-sensing/documents/device-setup-guide/) and [**Console User Manual**](https://developer.aitrios.sony-semicon.com/en/edge-ai-sensing/documents/console-user-manual/).
@@ -68,6 +70,10 @@ For basic Edge Device and Console operation, please refer to the [**Device Setup
     ```
 6. Access the host address from the pop-up in the lower right corner, and verify that the application is running.
 
+    > **Note**
+    >
+    > When checking the operation in `AITRIOS connect mode`, make sure that the inference upload is running on the device where the AI model and EdgeApp is deployed.
+
 #### Start application on local Docker environment(DevContainer)
 
 1. Open the cloned repository from VSCode's "Open Folder" in "File" tab
@@ -85,6 +91,10 @@ For basic Edge Device and Console operation, please refer to the [**Device Setup
     $ npm run dev
     ```
 8. Access the host address from the pop-up in the lower right corner, and verify that the application is running.
+
+    > **Note**
+    >
+    > When checking the operation in `AITRIOS connect mode`, make sure that the inference upload is running on the device where the AI model and EdgeApp is deployed.
 
 ## Documentation
 ### Functional Specifications

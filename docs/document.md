@@ -440,3 +440,13 @@ ConsoleAccessLibraryの「getInferenceResults」を利用し、デバイス毎�
 <img src="img/image11.png" style="width:7.0739in;height:5.1153in" alt="グラフィカル ユーザー インターフェイス が含まれている画像 自動的に生成された説明" />
 
 <img src="img/image12.png" style="width:5.2299in;height:2.417in" alt="カレンダー が含まれている画像 自動的に生成された説明" />
+
+6.  **推論結果が取得できない場合の処理について**
+
+棚段に登録したデバイスの推論結果が取得できない場合、棚段の占有率は算出されず「-」を表示する。
+
+棚を構成する階段のうち、1つでも占有率が算出されない階段があった場合、棚の占有率は算出されず「-」を表示する。
+
+<img src="img/image13.png" width="700" height="400"  alt="棚ごとの占有率 = 「-」の画像" />
+
+<img src="img/image14.png" width="500" height="220" alt="全体の占有率 = 「-」の画像" />

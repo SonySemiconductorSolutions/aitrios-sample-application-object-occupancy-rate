@@ -2,7 +2,7 @@ import React from 'react'
 import styles from '../styles/inferenceSettings.module.css'
 
 const ToggleSwitchButton2 = ({ option1Text, option2Text, isLocalMode, onChange }) => {
-  const buttonWidth = Math.max(option1Text.length, option2Text.length) * 10 + 50; // 文字数に応じてボタンサイズを調整
+  const buttonWidth = Math.max(option1Text.length, option2Text.length) * 10 + 50 // 文字数に応じてボタンサイズを調整
 
   return (
     <div className={styles.container}>
@@ -23,8 +23,7 @@ const ToggleSwitchButton2 = ({ option1Text, option2Text, isLocalMode, onChange }
         </div>
       </div>
     </div>
-  );
-};
-
+  )
+}
 
 export default ToggleSwitchButton2

@@ -15,9 +15,11 @@
  */
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Client, Config } from 'consoleAccessLibrary'
-import { getConsoleAccessLibrarySettings, ConsoleAccessLibrarySettings,API_TIME_OUT } from '../../common/config'
+import { getConsoleAccessLibrarySettings, ConsoleAccessLibrarySettings } from '../../common/config'
 import * as fs from 'fs'
-import getIsLocalMode from "./readModeSettings"
+import getIsLocalMode from './readModeSettings'
+import { format } from 'date-fns'
+import { utcToZonedTime } from 'date-fns-tz'
 
 const PUBLIC_DIRECTORY = './public'
 const DEVICEIMAGE_DIRECTORY = PUBLIC_DIRECTORY + '/deviceImage'
@@ -59,16 +61,36 @@ const readDeviceImage = async (deviceName: string) => {
     throw new Error('Unable to create instance.')
   }
 
+  const imageDirectory = await client.insight?.getImageDirectories(deviceName)
+  const latestimagename = imageDirectory.data[0].devices[0].Image.pop()
+
+  let startTime
+  let endTime
+  try {
+    const currentDate = utcToZonedTime(new Date(), 'UTC')
+    endTime = format(currentDate.getTime(), 'yyyyMMddHHmm')
+
+    const startDate = new Date(currentDate.getTime() - 1 * 60 * 60 * 1000)
+    startTime = format(startDate, 'yyyyMMddHHmm')
+  } catch (err) {
+    throw new Error(
+      'Cannot parse image directory name. Check that the directory name is correct date format.'
+    )
+  }
+
   const orderBy = 'DESC'
   const numberOfImages = 1
   const skip = 0
 
-  const imageDirectory= await client.insight?.getImageDirectories(deviceName)
-  const latestimagename=imageDirectory.data[0].devices[0].Image.pop()
+  const imageData = await client.insight?.getImages(deviceName, latestimagename, numberOfImages, skip, orderBy, startTime, endTime)
 
-  const imageData = await client.insight?.getImages(deviceName, latestimagename, numberOfImages, skip, orderBy)
-  const latestImage = imageData.data.images[0]
-  //console.log("update")
+  let latestImage
+  if (imageData.data.total_image_count > 0) {
+    latestImage = imageData.data.images[0]
+  } else {
+    return { image: '' }
+  }
+
   const base64Img = `data:image/jpg;base64,${latestImage.contents}`
 
   return { image: base64Img }
@@ -84,23 +106,23 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     return
   }
 
-  let isLocalMode=getIsLocalMode()
-  if(isLocalMode){
-    //console.log("Local Simulate Mode")
+  const isLocalMode = getIsLocalMode()
+  if (isLocalMode) {
+    // console.log("Local Simulate Mode")
     await readDeviceImageFile(req.query.deviceId.toString())
-    .then(result => {
-      res.status(200).json(result)
-    })
-    .catch(error => {
-      if (error.response) {
-        res.status(500).json({ message: error.response.data.message })
-      } else {
-        res.status(500).json({ message: error.message })
-      }
-    })
+      .then(result => {
+        res.status(200).json(result)
+      })
+      .catch(error => {
+        if (error.response) {
+          res.status(500).json({ message: error.response.data.message })
+        } else {
+          res.status(500).json({ message: error.message })
+        }
+      })
   }
-  if (!isLocalMode){
-    //console.log("Aitorios Connect Mode")
+  if (!isLocalMode) {
+    // console.log("Aitorios Connect Mode")
     await readDeviceImage(req.query.deviceId.toString())
       .then(result => {
         res.status(200).json(result)
